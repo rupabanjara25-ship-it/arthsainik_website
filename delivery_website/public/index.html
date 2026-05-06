@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="ArdhSainik — Your trusted local delivery service in Jashpur. Fresh groceries, dairy, snacks & daily essentials delivered to your door."
+    />
+    <title>ArdhSainik | Local Delivery</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css?v=20260505" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body class="home-page">
+    <div id="locationGate" class="modal-overlay">
+      <div class="location-gate-modal">
+        <h2>Verify Your Location</h2>
+        <p>We currently only serve Jashpur (Chhattisgarh).</p>
+        <input
+          type="text"
+          id="cityInput"
+          placeholder="Enter your City (e.g. Jashpur)"
+          autocomplete="address-level2"
+        />
+        <input
+          type="text"
+          id="pinInput"
+          placeholder="Enter Pincode (e.g. 496331)"
+          inputmode="numeric"
+          autocomplete="postal-code"
+        />
+        <button type="button" class="btn-primary" onclick="verifyLocation()">
+          Verify & Enter
+        </button>
+        <p
+          id="locationError"
+          style="color: red; margin-top: 10px; display: none"
+        >
+          Sorry, we don't deliver to this location yet.
+        </p>
+      </div>
+    </div>
+
+    <header id="mainHeader" class="hidden">
+      <a href="index.html" class="logo"
+        >Ardh<span style="color: var(--text-dark)">Sainik</span></a
+      >
+
+      <div class="search-bar">
+        <input
+          type="text"
+          id="productSearch"
+          placeholder="Search for groceries, dairy, snacks..."
+        />
+      </div>
+
+      <div class="header-right">
+        <button
+          type="button"
+          class="nav-btn home-btn"
+          onclick="window.location.href='index.html'"
+          aria-label="Home"
+        >
+          <i class="fas fa-home"></i> <span class="nav-text">Home</span>
+        </button>
+
+        <button
+          type="button"
+          class="nav-btn"
+          onclick="window.location.href='category.html'"
+          aria-label="Browse Categories"
+        >
+          <i class="fas fa-th-large"></i>
+          <span class="nav-text">Categories</span>
+        </button>
+
+        <button
+          type="button"
+          class="nav-btn"
+          onclick="window.location.href='orders.html'"
+          aria-label="Orders"
+        >
+          <i class="fas fa-box"></i>
+          <span class="nav-text">Orders</span>
+        </button>
+
+        <button
+          type="button"
+          class="nav-btn wishlist-btn"
+          onclick="window.location.href='wishlist.html'"
+          aria-label="Wishlist"
+        >
+          <i class="fas fa-heart" style="color: red"></i>
+          <span class="nav-text"></span>
+        </button>
+
+        <div id="authSection">
+          <button type="button" class="btn-primary" onclick="openLoginModal()">
+            <i class="fas fa-user"></i> <span class="nav-text">Login</span>
+          </button>
+        </div>
+
+        <button
+          type="button"
+          class="cart-icon"
+          onclick="window.location.href='cart.html'"
+          aria-label="Open cart"
+        >
+          <i class="fas fa-shopping-cart fa-lg"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="mainContent" class="hidden">
+      <div class="home-shell">
+        <section class="banner-section home-hero">
+          <div class="banner-container">
+            <img
+              id="bannerImage"
+              src="/uploads/banner1.png"
+              alt="ArdhSainik Delivery Banner"
+              class="banner-img active"
+            />
+            <div class="banner-overlay"></div>
+            <div class="banner-content">
+              <h1>Fast, Fresh & Local</h1>
+              <p>
+                Your favorite supermarket items delivered right to your door in
+                Jashpur.
+              </p>
+              <button
+                type="button"
+                class="btn-primary hero-cta"
+                onclick="window.location.href='category.html'"
+              >
+                Shop Now
+              </button>
+            </div>
+            <button
+              type="button"
+              class="banner-nav prev"
+              onclick="changeBanner(-1)"
+              aria-label="Previous image"
+            >
+              &#10094;
+            </button>
+            <button
+              type="button"
+              class="banner-nav next"
+              onclick="changeBanner(1)"
+              aria-label="Next image"
+            >
+              &#10095;
+            </button>
+            <div class="banner-dots" aria-label="Banner navigation">
+              <button
+                type="button"
+                class="banner-dot active"
+                onclick="goToBanner(0)"
+                aria-label="Show first banner"
+              ></button>
+              <button
+                type="button"
+                class="banner-dot"
+                onclick="goToBanner(1)"
+                aria-label="Show second banner"
+              ></button>
+            </div>
+          </div>
+        </section>
+
+        <section id="categoriesSection" class="categories-section">
+          <div class="category-grid" id="categoryGrid">
+            <div class="loading-spinner">
+              <div class="spinner"></div>
+              <p>Loading categories...</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="products-section">
+          <div class="section-title-row compact">
+            <h2 class="section-title">Popular Products</h2>
+            <a href="category.html" class="section-link">View all</a>
+          </div>
+          <div class="product-grid home-product-grid" id="productGrid">
+            <div class="loading-spinner">
+              <div class="spinner"></div>
+              <p>Loading products...</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <nav
+      id="mobileBottomNav"
+      class="mobile-bottom-nav hidden"
+      aria-label="Mobile navigation"
+    >
+      <button
+        type="button"
+        class="mobile-bottom-link active"
+        onclick="window.location.href='index.html'"
+        aria-label="Home"
+      >
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </button>
+      <button
+        type="button"
+        class="mobile-bottom-link"
+        onclick="window.location.href='category.html'"
+        aria-label="Categories"
+      >
+        <i class="fas fa-th-large"></i>
+        <span>Categories</span>
+      </button>
+      <button
+        type="button"
+        class="mobile-bottom-link"
+        onclick="window.location.href='wishlist.html'"
+        aria-label="Wishlist"
+      >
+        <i class="fas fa-heart"></i>
+        <span>Wishlist</span>
+      </button>
+      <button
+        type="button"
+        class="mobile-bottom-link mobile-cart-link"
+        onclick="window.location.href='orders.html'"
+        aria-label="Orders"
+      >
+        <i class="fas fa-box"></i>
+        <span>Orders</span>
+      </button>
+    </nav>
+
+    <footer id="mainFooter">
+      <div class="footer-content">
+        <div class="footer-col">
+          <h2 class="logo">ArdhSainik</h2>
+          <p style="color: #aaa" class="text">
+            Your trusted local delivery service in Jashpur.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="category.html">Categories</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="wishlist.html">Wishlist</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Customer Support</h3>
+          <ul>
+            <li><a href="tel:+919876543210">Call Us: +91 98765 43210</a></li>
+            <li>
+              <a href="mailto:support@ardhsainik.com"
+                >Email: support@ardhsainik.com</a
+              >
+            </li>
+            <li><a href="#">FAQs</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Follow Us</h3>
+          <ul class="social-links">
+            <li>
+              <a href="https://facebook.com/ardhsainik" target="_blank"
+                ><i class="fab fa-facebook"></i> Facebook</a
+              >
+            </li>
+            <li>
+              <a href="https://instagram.com/ardhsainik" target="_blank"
+                ><i class="fab fa-instagram"></i> Instagram</a
+              >
+            </li>
+            <li>
+              <a href="https://twitter.com/ardhsainik" target="_blank"
+                ><i class="fab fa-twitter"></i> Twitter</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>
+          &copy; 2026 ArdhSainik. All rights reserved. | Designed with ❤️ in
+          Jashpur
+        </p>
+      </div>
+    </footer>
+
+    <div id="authModal" class="modal-overlay hidden">
+      <div class="location-gate-modal" style="position: relative">
+        <button
+          type="button"
+          onclick="closeLoginModal()"
+          aria-label="Close login modal"
+          style="
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            background: none;
+            color: var(--text-light);
+            font-size: 1.2rem;
+          "
+        >
+          &times;
+        </button>
+        <h2 id="authTitle">Login</h2>
+        <form id="authForm">
+          <input
+            type="text"
+            id="authName"
+            placeholder="Full Name (for Signup)"
+            class="hidden"
+            autocomplete="name"
+          />
+          <input
+            type="email"
+            id="authEmail"
+            placeholder="Email Address"
+            required
+            autocomplete="email"
+          />
+          <input
+            type="password"
+            id="authPassword"
+            placeholder="Password"
+            required
+            autocomplete="current-password"
+          />
+          <button type="submit" class="btn-primary" id="authSubmitBtn">
+            Login
+          </button>
+          <p style="margin-top: 15px; font-size: 0.9rem">
+            <button
+              type="button"
+              onclick="return toggleAuthMode(event)"
+              id="authToggleLink"
+              style="color: var(--primary-color); background: none; padding: 0"
+            >
+              Create an account
+            </button>
+          </p>
+          <p
+            style="margin-top: 5px; font-size: 0.9rem"
+            id="forgotPasswordLinkContainer"
+          >
+            <button
+              type="button"
+              onclick="return showForgotPassword(event)"
+              style="color: var(--primary-color); background: none; padding: 0"
+            >
+              Forgot Password?
+            </button>
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const user = JSON.parse(localStorage.getItem("userInfo"));
+        const cartButton = document.querySelector(".cart-icon");
+        const homeButton = document.querySelector(".home-btn");
+        const wishlistButton = document.querySelector(".wishlist-btn");
+
+        if (user && user.role === "admin") {
+          if (cartButton) {
+            cartButton.remove(); // Remove the cart button if admin is logged in
+          }
+
+          if (homeButton) {
+            homeButton.remove(); // Remove the home button if admin is logged in
+          }
+
+          if (wishlistButton) {
+            wishlistButton.remove(); // Remove the wishlist button if admin is logged in
+          }
+        }
+      });
+    </script>
+    <script src="js/auth.js?v=20260505"></script>
+    <script src="js/main.js?v=20260505"></script>
+  </body>
+</html>

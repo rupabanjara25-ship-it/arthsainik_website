@@ -1,0 +1,38 @@
+[
+  {
+    "_id": "order-9711a795-b102-4507-8a8c-a01691831705",
+    "user": "admin",
+    "products": [
+      {
+        "name": "Chocolate",
+        "qty": 7,
+        "price": 12,
+        "image": "http://localhost:5000/uploads/products/productMainImage-1776780787030.jpg",
+        "product": "69e785f3d72133397d3fec71"
+      },
+      {
+        "name": "Chocolate",
+        "qty": 4,
+        "price": 789,
+        "image": "http://localhost:5000/uploads/products/productMainImage-1776781324837.png",
+        "product": "69e7880c0c3fd05451622614"
+      },
+      {
+        "name": "Lays Classic Salted (50g)",
+        "qty": 3,
+        "price": 20,
+        "image": "https://images.unsplash.com/photo-1566478989037-eac248f79b45?w=300&q=80",
+        "product": "69e35b76d42d46ac40ca771d"
+      }
+    ],
+    "shippingAddress": {
+      "name": "Administrator",
+      "address": "Jashpur\nChhattisgarh",
+      "phone": "8770563585"
+    },
+    "totalPrice": 3300,
+    "status": "Pending",
+    "createdAt": "2026-04-22T10:30:09.855Z",
+    "updatedAt": "2026-04-22T10:30:09.855Z"
+  }
+]
