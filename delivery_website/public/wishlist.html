@@ -24,78 +24,222 @@
     />
   </head>
   <body class="store-page">
-    <header id="mainHeader">
-      <a href="index.html" class="logo"
-        >Ardh<span style="color: var(--text-dark)">Sainik</span></a
-      >
+    <div id="hamburgerDrawerOverlay" class="cart-drawer-overlay" onclick="toggleHamburgerMenu()"></div>
+    <div id="hamburgerDrawer" class="cart-drawer hamburger-drawer">
+      <div class="cart-drawer-header">
+        <h2>Menu</h2>
+        <button onclick="toggleHamburgerMenu()" style="background:none; border:none; font-size:1.5rem;">&times;</button>
+      </div>
+      <div class="cart-drawer-content">
+        <div class="hamburger-menu-list">
+          <a href="index.html" class="hamburger-menu-item">
+            <i class="fas fa-home"></i> Home
+          </a>
+          <div id="authSectionHamburger"></div>
+          <a href="orders.html" class="hamburger-menu-item">
+            <i class="fas fa-box"></i> My Orders
+          </a>
+        </div>
+      </div>
+    </div>
+    <header id="mainHeader" class="hidden">
+      <div class="header-left">
+        <a href="index.html" class="logo">Ardh<span style="color: #333">Sainik</span></a>
+      </div>
 
-      <div class="search-bar">
-        <input
-          type="text"
-          placeholder="Search for groceries, dairy, snacks..."
-          onclick="window.location.href='index.html'"
-          readonly
-          style="cursor: pointer"
-        />
+      <div class="search-container">
+        <i class="fas fa-search"></i>
+        <input type="text" id="productSearch" class="search-bar-modern" placeholder="Search for groceries, dairy, snacks..." />
       </div>
 
       <div class="header-right">
-        <button
-          type="button"
-          class="nav-btn"
-          onclick="window.location.href='index.html'"
-          aria-label="Home"
-        >
-          <i class="fas fa-home"></i> <span class="nav-text">Home</span>
-        </button>
-
-        <button
-          type="button"
-          class="nav-btn"
-          onclick="window.location.href='category.html'"
-          aria-label="Browse Categories"
-        >
-          <i class="fas fa-th-large"></i>
-          <span class="nav-text">Categories</span>
-        </button>
-
-        <button
-          type="button"
-          class="nav-btn"
-          onclick="window.location.href='orders.html'"
-          aria-label="Orders"
-        >
-          <i class="fas fa-box"></i>
-          <span class="nav-text">Orders</span>
-        </button>
-
-        <button
-          type="button"
-          class="nav-btn"
-          onclick="window.location.href='wishlist.html'"
-          aria-label="Wishlist"
-        >
-          <i class="fas fa-heart" style="color: red"></i>
-          <span class="nav-text"></span>
-        </button>
-
-        <div id="authSection">
-          <button type="button" class="btn-primary" onclick="openLoginModal()">
-            <i class="fas fa-user"></i> <span class="nav-text">Login</span>
-          </button>
-        </div>
-
-        <button
-          type="button"
-          class="cart-icon"
-          onclick="window.location.href='cart.html'"
-          aria-label="Open cart"
-        >
-          <i class="fas fa-shopping-cart fa-lg"></i>
-          <span class="cart-count" id="cartCount">0</span>
+        <button type="button" class="nav-item-btn desktop-only" onclick="window.location.href='category.html'"><svg class="category-custom-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="8" height="8" rx="2" stroke="currentColor" stroke-width="2" /><rect x="14" y="2" width="8" height="8" rx="2" stroke="currentColor" stroke-width="2" /><rect x="2" y="14" width="8" height="8" rx="2" stroke="currentColor" stroke-width="2" /><circle cx="17" cy="17" r="3.5" stroke="currentColor" stroke-width="2" /><path d="M19.5 19.5L22 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg> <span>Categories</span></button>
+        <button type="button" class="nav-item-btn desktop-only" onclick="window.location.href='orders.html'"><i class="fas fa-box"></i> <span>Orders</span></button>
+        <button type="button" class="nav-item-btn desktop-only" onclick="window.location.href='wishlist.html'"><i class="fas fa-heart" style="color: #ff6b6b"></i> <span>Wishlist</span></button>
+        <div id="authSection" class="desktop-only"></div>
+        
+        <button type="button" class="cart-btn-modern" onclick="toggleCartDrawer()" aria-label="View Cart">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count-badge" id="cartCount">0</span>
         </button>
       </div>
-    </header>
+        <button type="button" class="mobile-only hamburger-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+      </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileMenu" class="mobile-menu-drawer">
+      <div class="mobile-menu-header">
+        <a href="index.html" class="logo">Ardh<span>Sainik</span></a>
+        <button class="close-menu" onclick="toggleMobileMenu()"><i class="fas fa-times"></i></button>
+      </div>
+      <nav class="mobile-menu-links">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="category.html"><svg class="category-custom-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="8" height="8" rx="2" stroke="currentColor" stroke-width="2" /><rect x="14" y="2" width="8" height="8" rx="2" stroke="currentColor" stroke-width="2" /><rect x="2" y="14" width="8" height="8" rx="2" stroke="currentColor" stroke-width="2" /><circle cx="17" cy="17" r="3.5" stroke="currentColor" stroke-width="2" /><path d="M19.5 19.5L22 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg> Categories</a>
+        <a href="orders.html"><i class="fas fa-box"></i> Orders</a>
+        <a href="wishlist.html"><i class="fas fa-heart"></i> Wishlist</a>
+        <div id="mobileAuthSection"></div>
+      </nav>
+    </div>
+
+    <div class="cart-drawer-overlay" id="cartDrawerOverlay" onclick="toggleCartDrawer()"></div>
+    <div class="cart-drawer-overlay" id="profileDrawerOverlay" onclick="toggleProfileDrawer()"></div>
+
+    <div class="cart-drawer" id="profileDrawer">
+      <div class="cart-drawer-header">
+        <h2 id="profileDrawerTitle"><i class="fas fa-arrow-left" onclick="toggleProfileDrawer()" style="cursor:pointer"></i> My Profile</h2>
+      </div>
+      <div class="cart-drawer-content" id="profileDrawerContent">
+          <div class="profile-details-container" style="padding: 20px;">
+            <div class="profile-header-info" style="text-align: center; margin-bottom: 25px;">
+              <div class="profile-image-large" style="position: relative; width: 120px; height: 120px; margin: 0 auto 15px; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                <img id="drawerProfileImg" src="https://via.placeholder.com/150" alt="Profile" style="width: 100%; height: 100%; object-fit: cover;">
+                <label for="profileImageInput" class="edit-img-btn" style="position: absolute; bottom: 0; right: 0; left: 0; background: rgba(0,0,0,0.5); color: #fff; padding: 5px; cursor: pointer; font-size: 0.8rem;"><i class="fas fa-camera"></i> Edit</label>
+                <input type="file" id="profileImageInput" hidden accept="image/*" onchange="updateProfileImage(this)">
+              </div>
+              <h3 id="drawerProfileName" style="margin-bottom: 5px; font-size: 1.4rem;">User Name</h3>
+              <p id="drawerProfileEmail" style="color: #666; font-size: 0.9rem;">user@example.com</p>
+            </div>
+            <div class="profile-info-grid" style="display: grid; gap: 15px; margin-bottom: 30px;">
+              <div class="info-item" style="background: #f8f9fa; padding: 12px; border-radius: 10px;">
+                <label style="display: block; font-size: 0.75rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Phone</label>
+                <p id="drawerProfilePhone" style="font-weight: 600;">+91 00000 00000</p>
+              </div>
+              <div class="info-item" style="background: #f8f9fa; padding: 12px; border-radius: 10px;">
+                <label style="display: block; font-size: 0.75rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Address</label>
+                <p id="drawerProfileAddress" style="font-weight: 600;">Jashpur, Chhattisgarh</p>
+              </div>
+            </div>
+            <div class="profile-actions-list" style="display: grid; gap: 10px;">
+              <button class="profile-action-item" onclick="window.location.href='orders.html'" style="display: flex; align-items: center; justify-content: space-between; padding: 15px; background: #fff; border: 1px solid #eee; border-radius: 10px; width: 100%; text-align: left; transition: all 0.2s;">
+                <span><i class="fas fa-box" style="margin-right: 12px; color: var(--primary-color);"></i> My Orders</span>
+                <i class="fas fa-chevron-right" style="color: #ccc; font-size: 0.8rem;"></i>
+              </button>
+              <button class="profile-action-item" onclick="window.location.href='wishlist.html'" style="display: flex; align-items: center; justify-content: space-between; padding: 15px; background: #fff; border: 1px solid #eee; border-radius: 10px; width: 100%; text-align: left; transition: all 0.2s;">
+                <span><i class="fas fa-heart" style="margin-right: 12px; color: #ff6b6b;"></i> My Wishlist</span>
+                <i class="fas fa-chevron-right" style="color: #ccc; font-size: 0.8rem;"></i>
+              </button>
+            </div>
+          </div>
+      </div>
+      <div class="cart-drawer-footer" style="padding: 20px;">
+        <button type="button" class="checkout-btn-modern" onclick="logout()" style="background: #e74c3c; width: 100%; justify-content: center;">
+          <div class="checkout-btn-action">Logout <i class="fas fa-sign-out-alt" style="margin-left: 8px;"></i></div>
+        </button>
+      </div>
+    </div>
+      onclick="toggleCartDrawer()"
+    ></div>
+    <div class="cart-drawer" id="cartDrawer">
+      <div class="cart-drawer-header">
+        <h2 id="drawerTitle"><i class="fas fa-arrow-left" onclick="toggleCartDrawer()" style="cursor:pointer"></i> My Cart</h2>
+        <button type="button" class="nav-item-btn" style="color: #27ae60; flex-direction: row; gap: 6px;">
+          <i class="fas fa-share-alt"></i> <span style="font-size: 0.9rem">Share</span>
+        </button>
+      </div>
+
+      <div class="cart-drawer-content" id="cartDrawerContent">
+        <!-- View 1: Cart Items -->
+        <div id="cartItemsView">
+          <!-- Delivery Banner -->
+          <div class="cart-delivery-banner" style="margin-bottom: 1rem;">
+            <i class="fas fa-stopwatch"></i>
+            <div class="cart-delivery-text">
+              <h3>Delivery in 11 minutes</h3>
+              <p id="shipmentCount">Shipment of 0 items</p>
+            </div>
+          </div>
+
+          <!-- Items Container -->
+          <div class="drawer-items-container" id="drawerItemsList" style="margin-bottom: 1rem;">
+            <!-- Dynamically filled -->
+          </div>
+
+          <!-- Bill Details -->
+          <div class="bill-details-container" style="margin-bottom: 1rem;">
+            <h3>Bill details</h3>
+            <div class="bill-row">
+              <span><i class="fas fa-file-alt"></i> Items total <span class="saved-tag" id="drawerSavedTag">Saved ₹0</span></span>
+              <span id="drawerItemsTotal">₹0</span>
+            </div>
++            <div class="bill-row">
++              <span><i class="fas fa-bicycle"></i> Delivery charge</span>
++              <span>₹25</span>
++            </div>
++            <div class="bill-row">
++              <span><i class="fas fa-shopping-bag"></i> Handling charge</span>
++              <span>₹2</span>
++            </div>
++            <div class="bill-row grand-total">
++              <span>Grand total</span>
++              <span id="drawerGrandTotal">₹0</span>
++            </div>
++          </div>
+
+          <!-- Cancellation Policy -->
+          <div class="cancellation-policy">
+            <h4>Cancellation Policy</h4>
+            <p>Orders cannot be cancelled once packed for delivery. In case of unexpected delays, a refund will be provided, if applicable.</p>
+          </div>
+        </div>
+
+        <!-- View 2: Checkout Information -->
+        <div id="cartCheckoutView" class="hidden">
+          <div class="bill-details-container">
+            <h3 style="margin-bottom: 1.25rem;">Delivery Information</h3>
+            <form id="drawerCheckoutForm" class="checkout-form" onsubmit="placeOrderFromDrawer(event)">
+              <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <input type="text" id="drawerShipName" placeholder="Full Name" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                <input type="text" id="drawerShipPhone" placeholder="Phone Number" required inputmode="tel" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                <div id="addressSelectionArea" style="margin-bottom: 1rem;">
+                  <label style="font-size: 0.85rem; font-weight: 700; color: #444; margin-bottom: 8px; display: block;">Select Delivery Address</label>
+                  <div id="savedAddressesListCheckout" style="display: flex; flex-direction: column; gap: 8px;">
+                    <!-- Dynamically filled -->
+                  </div>
+                  <button type="button" onclick="showAddNewAddressCheckout()" style="width: 100%; padding: 10px; background: #f8f9fa; border: 1px dashed #ccc; border-radius: 8px; font-size: 0.85rem; margin-top: 10px; color: #666;">
+                    <i class="fas fa-plus-circle"></i> Use Different Address
+                  </button>
+                  <div id="newAddressFormCheckout" class="hidden" style="margin-top: 10px;">
+                    <textarea id="drawerShipAddress" placeholder="Complete Address (Jashpur only)" rows="3" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; resize: none;"></textarea>
+                  </div>
+                </div>
+                
+                <h3 style="margin-top: 0.5rem; margin-bottom: 0.25rem;">Payment Method</h3>
+                <select id="drawerPaymentMethod" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; background: white;">
+                  <option value="Cash on Delivery">Cash on Delivery</option>
+                  <option value="Online Payment">Online Payment</option>
+                </select>
+                <p style="font-size: 0.75rem; color: #777;">* Minimum order ₹500 for delivery.</p>
+              </div>
+              <button type="submit" id="hiddenSubmitBtn" style="display:none;"></button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="cart-drawer-footer">
+        <!-- Proceed Button (Cart View) -->
+        <button type="button" id="proceedBtn" class="checkout-btn-modern" onclick="showCheckoutInDrawer()">
+          <div class="checkout-btn-total">
+            <span id="footerTotal">₹0</span>
+            <span>Total</span>
+          </div>
+          <div class="checkout-btn-action">
+            Proceed to Checkout <i class="fas fa-chevron-right"></i>
+          </div>
+        </button>
+
+        <!-- Place Order Button (Checkout View) -->
+        <button type="button" id="placeOrderBtn" class="checkout-btn-modern hidden" onclick="document.getElementById('hiddenSubmitBtn').click()">
+          <div class="checkout-btn-total">
+            <span id="footerTotalCheckout">₹0</span>
+            <span>Total</span>
+          </div>
+          <div class="checkout-btn-action">
+            Place Order <i class="fas fa-check-circle"></i>
+          </div>
+        </button>
+      </div>
+    </div>
 
     <main class="page-main">
       <div class="wishlist-container page-container">
@@ -109,42 +253,26 @@
       </div>
     </main>
 
-    <nav class="mobile-bottom-nav" aria-label="Mobile navigation">
-      <button
-        type="button"
-        class="mobile-bottom-link"
-        onclick="window.location.href='index.html'"
-        aria-label="Home"
-      >
+    <nav class="mobile-bottom-nav hidden" aria-label="Mobile navigation">
+      <button type="button" class="mobile-bottom-link" onclick="window.location.href='index.html'" aria-label="Home">
         <i class="fas fa-home"></i>
         <span>Home</span>
       </button>
-      <button
-        type="button"
-        class="mobile-bottom-link"
-        onclick="window.location.href='category.html'"
-        aria-label="Categories"
-      >
-        <i class="fas fa-th-large"></i>
+      <button type="button" class="mobile-bottom-link" onclick="window.location.href='category.html'" aria-label="Categories">
+        <svg class="category-custom-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="8" height="8" rx="2" stroke="currentColor" stroke-width="2" /><rect x="14" y="2" width="8" height="8" rx="2" stroke="currentColor" stroke-width="2" /><rect x="2" y="14" width="8" height="8" rx="2" stroke="currentColor" stroke-width="2" /><circle cx="17" cy="17" r="3.5" stroke="currentColor" stroke-width="2" /><path d="M19.5 19.5L22 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
         <span>Categories</span>
       </button>
-      <button
-        type="button"
-        class="mobile-bottom-link active"
-        onclick="window.location.href='wishlist.html'"
-        aria-label="Wishlist"
-      >
+      <button type="button" class="mobile-bottom-link" onclick="window.location.href='wishlist.html'" aria-label="Wishlist">
         <i class="fas fa-heart"></i>
         <span>Wishlist</span>
       </button>
-      <button
-        type="button"
-        class="mobile-bottom-link mobile-cart-link"
-        onclick="window.location.href='orders.html'"
-        aria-label="Orders"
-      >
+      <button type="button" class="mobile-bottom-link mobile-cart-link" onclick="window.location.href='orders.html'" aria-label="Orders">
         <i class="fas fa-box"></i>
         <span>Orders</span>
+      </button>
+      <button type="button" class="mobile-bottom-link" onclick="toggleProfileDrawer()" aria-label="Profile">
+        <i class="fas fa-user-circle"></i>
+        <span>Profile</span>
       </button>
     </nav>
 
@@ -237,8 +365,13 @@
             id="authEmail"
             placeholder="Email Address"
             required
-            autocomplete="email"
-          />
+            autocomplete="email" />
+          <input type="text" id="authPhone" placeholder="Phone Number" class="hidden auth-extra-field" autocomplete="tel" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px;" />
+          <textarea id="authAddress" placeholder="Full Delivery Address" class="hidden auth-extra-field" rows="2" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px; resize: none;"></textarea>
+          <div id="profileImageUploadContainer" class="hidden auth-extra-field" style="margin-bottom: 15px; text-align: left;">
+            <label style="display: block; margin-bottom: 5px; font-size: 0.9rem; color: var(--text-light);">Profile Image (Required)</label>
+            <input type="file" id="authProfileImage" accept="image/*" style="padding: 10px; border: 1px dashed #ddd; width: 100%; border-radius: 8px; font-size: 0.85rem;">
+          </div>
           <input
             type="password"
             id="authPassword"

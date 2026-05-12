@@ -24,78 +24,62 @@
     />
   </head>
   <body class="store-page">
-    <header id="mainHeader">
-      <a href="index.html" class="logo"
-        >Ardh<span style="color: var(--text-dark)">Sainik</span></a
-      >
+    <div id="hamburgerDrawerOverlay" class="cart-drawer-overlay" onclick="toggleHamburgerMenu()"></div>
+    <div id="hamburgerDrawer" class="cart-drawer hamburger-drawer">
+      <div class="cart-drawer-header">
+        <h2>Menu</h2>
+        <button onclick="toggleHamburgerMenu()" style="background:none; border:none; font-size:1.5rem;">&times;</button>
+      </div>
+      <div class="cart-drawer-content">
+        <div class="hamburger-menu-list">
+          <a href="index.html" class="hamburger-menu-item">
+            <i class="fas fa-home"></i> Home
+          </a>
+          <div id="authSectionHamburger"></div>
+          <a href="orders.html" class="hamburger-menu-item">
+            <i class="fas fa-box"></i> My Orders
+          </a>
+        </div>
+      </div>
+    </div>
+    <header id="mainHeader" class="hidden">
+      <div class="header-left">
+        <a href="index.html" class="logo">Ardh<span style="color: #333">Sainik</span></a>
+      </div>
 
-      <div class="search-bar">
-        <input
-          type="text"
-          placeholder="Search for groceries, dairy, snacks..."
-          onclick="window.location.href='index.html'"
-          readonly
-          style="cursor: pointer"
-        />
+      <div class="search-container">
+        <i class="fas fa-search"></i>
+        <input type="text" id="productSearch" class="search-bar-modern" placeholder="Search for groceries, dairy, snacks..." />
       </div>
 
       <div class="header-right">
-        <button
-          type="button"
-          class="nav-btn"
-          onclick="window.location.href='index.html'"
-          aria-label="Home"
-        >
-          <i class="fas fa-home"></i> <span class="nav-text">Home</span>
-        </button>
-
-        <button
-          type="button"
-          class="nav-btn"
-          onclick="window.location.href='category.html'"
-          aria-label="Browse Categories"
-        >
-          <i class="fas fa-th-large"></i>
-          <span class="nav-text">Categories</span>
-        </button>
-
-        <button
-          type="button"
-          class="nav-btn"
-          onclick="window.location.href='orders.html'"
-          aria-label="Orders"
-        >
-          <i class="fas fa-box"></i>
-          <span class="nav-text">Orders</span>
-        </button>
-
-        <button
-          type="button"
-          class="nav-btn"
-          onclick="window.location.href='wishlist.html'"
-          aria-label="Wishlist"
-        >
-          <i class="fas fa-heart" style="color: red"></i>
-          <span class="nav-text"></span>
-        </button>
-
-        <div id="authSection">
-          <button type="button" class="btn-primary" onclick="openLoginModal()">
-            <i class="fas fa-user"></i> <span class="nav-text">Login</span>
-          </button>
-        </div>
-
-        <button
-          type="button"
-          class="cart-icon"
-          onclick="window.location.href='cart.html'"
-          aria-label="Open cart"
-        >
-          <i class="fas fa-shopping-cart fa-lg"></i>
-          <span class="cart-count" id="cartCount">0</span>
+        <button type="button" class="nav-item-btn desktop-only" onclick="window.location.href='category.html'"><svg class="category-custom-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="8" height="8" rx="2" stroke="currentColor" stroke-width="2" /><rect x="14" y="2" width="8" height="8" rx="2" stroke="currentColor" stroke-width="2" /><rect x="2" y="14" width="8" height="8" rx="2" stroke="currentColor" stroke-width="2" /><circle cx="17" cy="17" r="3.5" stroke="currentColor" stroke-width="2" /><path d="M19.5 19.5L22 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg> <span>Categories</span></button>
+        <button type="button" class="nav-item-btn desktop-only" onclick="window.location.href='orders.html'"><i class="fas fa-box"></i> <span>Orders</span></button>
+        <button type="button" class="nav-item-btn desktop-only" onclick="window.location.href='wishlist.html'"><i class="fas fa-heart" style="color: #ff6b6b"></i> <span>Wishlist</span></button>
+        <div id="authSection" class="desktop-only"></div>
+        
+        <button type="button" class="cart-btn-modern" onclick="toggleCartDrawer()" aria-label="View Cart">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count-badge" id="cartCount">0</span>
         </button>
       </div>
-    </header>
+        <button type="button" class="mobile-only hamburger-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+      </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileMenu" class="mobile-menu-drawer">
+      <div class="mobile-menu-header">
+        <a href="index.html" class="logo">Ardh<span>Sainik</span></a>
+        <button class="close-menu" onclick="toggleMobileMenu()"><i class="fas fa-times"></i></button>
+      </div>
+      <nav class="mobile-menu-links">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="category.html"><svg class="category-custom-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="8" height="8" rx="2" stroke="currentColor" stroke-width="2" /><rect x="14" y="2" width="8" height="8" rx="2" stroke="currentColor" stroke-width="2" /><rect x="2" y="14" width="8" height="8" rx="2" stroke="currentColor" stroke-width="2" /><circle cx="17" cy="17" r="3.5" stroke="currentColor" stroke-width="2" /><path d="M19.5 19.5L22 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg> Categories</a>
+        <a href="orders.html"><i class="fas fa-box"></i> Orders</a>
+        <a href="wishlist.html"><i class="fas fa-heart"></i> Wishlist</a>
+        <div id="mobileAuthSection"></div>
+      </nav>
+    </div>
 
     <main class="page-main">
       <div class="cart-container page-container">
@@ -211,42 +195,26 @@
       </div>
     </main>
 
-    <nav class="mobile-bottom-nav" aria-label="Mobile navigation">
-      <button
-        type="button"
-        class="mobile-bottom-link"
-        onclick="window.location.href='index.html'"
-        aria-label="Home"
-      >
+    <nav class="mobile-bottom-nav hidden" aria-label="Mobile navigation">
+      <button type="button" class="mobile-bottom-link" onclick="window.location.href='index.html'" aria-label="Home">
         <i class="fas fa-home"></i>
         <span>Home</span>
       </button>
-      <button
-        type="button"
-        class="mobile-bottom-link"
-        onclick="window.location.href='category.html'"
-        aria-label="Categories"
-      >
-        <i class="fas fa-th-large"></i>
+      <button type="button" class="mobile-bottom-link" onclick="window.location.href='category.html'" aria-label="Categories">
+        <svg class="category-custom-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="8" height="8" rx="2" stroke="currentColor" stroke-width="2" /><rect x="14" y="2" width="8" height="8" rx="2" stroke="currentColor" stroke-width="2" /><rect x="2" y="14" width="8" height="8" rx="2" stroke="currentColor" stroke-width="2" /><circle cx="17" cy="17" r="3.5" stroke="currentColor" stroke-width="2" /><path d="M19.5 19.5L22 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
         <span>Categories</span>
       </button>
-      <button
-        type="button"
-        class="mobile-bottom-link"
-        onclick="window.location.href='wishlist.html'"
-        aria-label="Wishlist"
-      >
+      <button type="button" class="mobile-bottom-link" onclick="window.location.href='wishlist.html'" aria-label="Wishlist">
         <i class="fas fa-heart"></i>
         <span>Wishlist</span>
       </button>
-      <button
-        type="button"
-        class="mobile-bottom-link mobile-cart-link"
-        onclick="window.location.href='orders.html'"
-        aria-label="Orders"
-      >
+      <button type="button" class="mobile-bottom-link mobile-cart-link" onclick="window.location.href='orders.html'" aria-label="Orders">
         <i class="fas fa-box"></i>
         <span>Orders</span>
+      </button>
+      <button type="button" class="mobile-bottom-link" onclick="toggleProfileDrawer()" aria-label="Profile">
+        <i class="fas fa-user-circle"></i>
+        <span>Profile</span>
       </button>
     </nav>
 
@@ -339,8 +307,13 @@
             id="authEmail"
             placeholder="Email Address"
             required
-            autocomplete="email"
-          />
+            autocomplete="email" />
+          <input type="text" id="authPhone" placeholder="Phone Number" class="hidden auth-extra-field" autocomplete="tel" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px;" />
+          <textarea id="authAddress" placeholder="Full Delivery Address" class="hidden auth-extra-field" rows="2" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px; resize: none;"></textarea>
+          <div id="profileImageUploadContainer" class="hidden auth-extra-field" style="margin-bottom: 15px; text-align: left;">
+            <label style="display: block; margin-bottom: 5px; font-size: 0.9rem; color: var(--text-light);">Profile Image (Required)</label>
+            <input type="file" id="authProfileImage" accept="image/*" style="padding: 10px; border: 1px dashed #ddd; width: 100%; border-radius: 8px; font-size: 0.85rem;">
+          </div>
           <input
             type="password"
             id="authPassword"

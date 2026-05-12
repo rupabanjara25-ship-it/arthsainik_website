@@ -22,6 +22,10 @@ const storage = multer.diskStorage({
       const productDir = path.join(uploadsRoot, 'products');
       ensureDir(productDir);
       cb(null, productDir);
+    } else if (file.fieldname === 'profileImage') {
+      const profileDir = path.join(uploadsRoot, 'profiles');
+      ensureDir(profileDir);
+      cb(null, profileDir);
     } else {
       ensureDir(uploadsRoot);
       cb(null, uploadsRoot);

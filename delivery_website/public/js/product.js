@@ -39,31 +39,40 @@ async function fetchProductDetails() {
         }
 
         container.innerHTML = `
-            <div class="gallery">
-                <img src="${mainImage}" id="mainProductImage" class="main-image" alt="${product.name}">
-                <div class="thumbnails">
-                    ${imagesHtml}
-                </div>
+            <div class="product-image-section" id="zoomContainer">
+                <img src="${mainImage}" id="mainProductImage" alt="${product.name}">
             </div>
-            <div class="details">
-                <span class="product-category" style="color: var(--primary-color); font-weight: bold;">${product.category ? product.category.name : 'General'}</span>
-                <h1>${product.name}</h1>
-                <div class="price">₹${product.price}</div>
-                <p>${product.description}</p>
+            <div class="product-info-section">
+                <span class="product-category" style="color: var(--primary-color); font-weight: bold; font-size: 0.9rem;">${product.category ? product.category.name : 'General'}</span>
+                <h1 style="font-size: 1.8rem; margin: 5px 0;">${product.name}</h1>
+                <div class="price" style="font-size: 1.5rem; font-weight: 700; color: #333; margin-bottom: 10px;">₹${product.price}</div>
+                <p style="color: #666; line-height: 1.6; margin-bottom: 20px;">${product.description}</p>
                 <div class="product-detail-actions">
-                    <button type="button" class="btn-primary" onclick="addToCart('${product._id}', '${product.name}', ${product.price}, '${mainImage}')">
-                        <i class="fas fa-shopping-cart"></i> Add to Cart
-                    </button>
-                    <button type="button" class="btn-primary" style="background: var(--secondary-color);" onclick="buyNow('${product._id}', '${product.name}', ${product.price}, '${mainImage}')">
-                        <i class="fas fa-bolt"></i> Order Now
-                    </button>
+                    ${product.stock > 0 
+                        ? `<button type="button" class="btn-primary" onclick="addToCart('${product._id}', '${product.name}', ${product.price}, '${mainImage}')">Add to Cart</button>`
+                        : `<button type="button" class="btn-primary" disabled style="background:#ccc;cursor:not-allowed;">Out of Stock</button>`
+                    }
                 </div>
             </div>
         `;
 
-        // Fetch related products (using the main.js function, which automatically populates #productGrid)
-        if (typeof fetchProducts === 'function') {
-            fetchProducts();
+        // Initialize Zoom
+        const zoomContainer = document.getElementById('zoomContainer');
+        const zoomImg = zoomContainer.querySelector('img');
+        zoomContainer.addEventListener('mousemove', (e) => {
+            const rect = zoomContainer.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            zoomImg.style.transformOrigin = `${x}% ${y}%`;
+            zoomImg.style.transform = "scale(2.5)";
+        });
+        zoomContainer.addEventListener('mouseleave', () => {
+            zoomImg.style.transform = "scale(1)";
+        });
+
+        // Fetch related products from SAME category
+        if (typeof fetchProducts === 'function' && product.category) {
+            fetchProducts(product.category._id);
         }
 
     } catch (e) {
