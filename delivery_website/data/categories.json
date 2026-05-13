@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "_id": "category-fd70cff5-6117-4bc4-b3bb-90798a8a4881",
+    "name": "Human things",
+    "description": "",
+    "image": "",
+    "createdAt": "2026-05-13T05:18:51.211Z",
+    "updatedAt": "2026-05-13T05:18:51.211Z"
+  }
+]

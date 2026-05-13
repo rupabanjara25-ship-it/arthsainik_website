@@ -1,1 +1,15 @@
-[]
+[
+  {
+    "_id": "user-7402d58f-121d-4a36-8fe9-497d3cad91c5",
+    "name": "Rupa banjara",
+    "email": "reetisingh24@navgurukul.org",
+    "passwordHash": "$2b$10$p6IxzEi3q9GK1eCSjSkUROYFBLM2eWFF5gMiF95HFOStOyKWD2fKi",
+    "role": "user",
+    "phone": "6265909972",
+    "address": "Jashpur\r\nChhattisgarh",
+    "resetPasswordOtp": null,
+    "resetPasswordExpires": null,
+    "createdAt": "2026-05-13T05:20:01.078Z",
+    "updatedAt": "2026-05-13T05:20:01.078Z"
+  }
+]

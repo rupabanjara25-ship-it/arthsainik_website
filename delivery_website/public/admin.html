@@ -26,8 +26,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
       :root {
-        --bg-dark: #24282f;
-        --sidebar-bg: linear-gradient(180deg, #182033 0%, #121a2a 100%);
+        --bg-dark: #ffffff;
+        --sidebar-bg: linear-gradient(180deg, #283318 0%, #121a2a 100%);
         --card-bg: rgba(255, 255, 255, 0.84);
         --card-strong: rgba(255, 255, 255, 0.92);
         --text-primary: #1f2430;
@@ -65,8 +65,8 @@
       .dashboard-container {
         display: flex;
         min-height: calc(100vh - 44px);
-        max-width: 1480px;
-        margin: 0 auto;
+        max-width: 2080px;
+        /* margin: 0 auto;  */ /*full screen ke liye*/
         border-radius: 28px;
         overflow: hidden;
         border: 1px solid rgba(255, 255, 255, 0.12);
@@ -303,7 +303,7 @@
         border: 1px solid var(--border-color);
         border-radius: 99px;
         padding: 0.5rem 1.25rem;
-        width: min(340px, 100%);
+        width: 780px;
         transition: all 0.3s ease;
         box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
       }
@@ -684,7 +684,7 @@
         border-radius: 24px;
         padding: 1.7rem;
         backdrop-filter: blur(10px);
-        max-width: 800px;
+        max-width: 3000px;
         box-shadow: 0 18px 30px rgba(15, 23, 42, 0.08);
       }
 
@@ -1560,7 +1560,7 @@
       }
 
       .modal-content {
-        background: var(--sidebar-bg);
+        /* background: var(--sidebar-bg); */
         width: 90%;
         max-width: 500px;
         border-radius: 16px;

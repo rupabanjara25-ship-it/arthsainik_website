@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "_id": "product-e2e01a92-58b7-4cba-87ae-057eb67dded5",
+    "name": "sliper",
+    "description": "This is flexiable.",
+    "price": 32,
+    "stock": 0,
+    "category": "category-fd70cff5-6117-4bc4-b3bb-90798a8a4881",
+    "images": [
+      "/uploads/products/productMainImage-1778649531258.png",
+      "/uploads/products/productGalleryImages-1778649531278.png"
+    ],
+    "createdAt": "2026-05-13T05:18:51.288Z",
+    "updatedAt": "2026-05-13T05:29:43.405Z"
+  }
+]
